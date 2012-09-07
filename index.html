@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>AppJS</title>
+    <link rel="shortcut icon" href="favicon.ico"/>
+	<style>
+	* {margin:0;padding:0;}
+	html, 
+	body, 
+	#box { 
+		height:100%; 
+		font-size:9px;
+		font:small/1.5 "宋体", serif; 
+		background:#66a3d2;
+		} 
+		body { 
+		text-align:center; 
+		} 
+	#box { 
+		text-align:left; 
+		background:#666; 
+		display:table; 
+		width:80%; 
+		margin:0 auto; 
+		position:relative; 
+		} 
+	#box > div { 
+		display:table-row; 
+		} 
+	#header, 
+	#footer { 
+		background:#fcc; 
+		height:26px;
+		} 
+	#header {
+		}	
+	#main { 
+		background:#ccf; 
+		display:table-cell; 
+		background:#ffc; 
+		vertical-align:bottom; 
+		overflow:scroll;
+		} 
+	
+	#wrap { 
+		text-align:left; 
+		height:100%;
+		
+		} 
+	#user_list{
+		display : table-cell;
+		width:200px;
+		height: 100%;
+		border-right:1px dotted #ccc;
+		list-style : none;
+		padding : 5px;
+
+		}
+	#chat_con{
+		display : table-cell;
+		padding : 5px;
+		}
+	#chat_con .said{
+		padding-left : 30px;
+		}
+	#chat_con > .say  .nicky{
+		cursor :pointer;
+		}
+	#say {
+		width : 300px 
+		}
+	#color{
+		width:50px;
+		}
+	
+	</style>
+	
+  </head>
+
+<body>
+<div id="box"> 
+  <div id="header">
+	</div> 
+  <div id="main"> 
+    <div id="wrap"> 
+		<ul id="user_list"></ul>
+		 
+		<div id="chat_con" >
+		</div>
+		
+      </div> 
+  </div> 
+  <div id="footer"> 
+		<label> nickname:<input id="myname"/></label>
+		<label style="display:none"> notify:<input id="notify" type="checkbox"/></label>
+		<input placeholder="set color" title="set color" type="color" id="color" /> <input id="say" />
+	</div>
+<script type="text/tpl" id ="chat_tpl">
+	<? this.forEach(function(say){ ?>
+	<div class="say"> 
+		<p><span class="nicky"><?= say.from ?></span> <?= new Date(say.time).toLocaleTimeString() ?>: </p>
+		<span class="said"  style="color:<?= /\#?\w{3,6}/.test(say.color)? say.color : '' ?>;"><?= say.data ?></span> 
+	</div>
+	<? }); ?>
+</script>
+<script type="text/tpl" id ="user_list_tpl">
+	<? this.forEach(function(user){ ?>
+	<li><span title="<?= user.ip?>" > 
+		<?= user.nicky ? user.nicky : user.ip?>
+		</span>
+	</li>	
+	<? }); ?>
+</script>
+<script src=weave_f.js ></script>
+<script src=ate.js ></script>
+<script src=main.js ></script>
+
+
+  </body>
+</html>
